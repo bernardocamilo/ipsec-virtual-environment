@@ -1,0 +1,24 @@
+# /etc/ipsec.conf - strongSwan IPsec configuration file
+
+config setup
+
+conn %default
+  ikelifetime=60m
+  keylife=20m
+  rekeymargin=3m
+  keyingtries=1
+  authby=secret
+  keyexchange=ikev2
+  esp=aes256-sha1!
+  mobike=no
+
+conn net-net
+  left=<%= @left_ip %>
+  leftsubnet=<%= @left_subnet %>
+  leftid=<%= @left_id %>
+  leftfirewall=yes
+  right=<%= @right_ip %>
+  rightsubnet=<%= @right_subnet %>
+  rightid=<%= @right_id %>
+  auto=add
+
